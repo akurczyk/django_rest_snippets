@@ -35,7 +35,7 @@ services:
     build: ./app
     # Django Celery Beat
     command: celery beat --app=django_rest_pg.celery.app --scheduler django_celery_beat.schedulers:DatabaseScheduler --loglevel=INFO
-    # Standard Celery BeatBeat
+    # Standard Celery Beat
     #command: celery beat --app=django_rest_pg.celery.app --loglevel=INFO
     volumes:
       - django_static_data:/app/static
