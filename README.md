@@ -1,5 +1,7 @@
 # django_rest_snippets
 
+🌵 Django
+
 🚀 Django REST framework
 
 🥬 Celery
