@@ -6,3 +6,5 @@ __pycache__/
 /app/db.sqlite3
 /app/media
 /app/static
+celerybeat.pid
+celerybeat-schedule

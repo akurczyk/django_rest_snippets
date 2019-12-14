@@ -1,4 +1,5 @@
 import os
+from celery.schedules import crontab
 
 # Defaults
 
@@ -12,6 +13,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_celery_results',
+    'django_celery_beat',
     'blog',
 ]
 
@@ -108,5 +111,22 @@ REST_FRAMEWORK = {
 
 
 # Celery
-CELERY_BACKEND_URL = os.environ.get('CELERY_BACKEND', 'redis://localhost:6379')
-CELERY_BROKER_URL = os.environ.get('CELERY_BACKEND', 'redis://localhost:6379')
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', 'amqp://rabbitmq:5672')        # Can also use Redis as the broker
+CELERY_RESULT_BACKEND_URL = os.environ.get('CELERY_RESULT_BACKEND', 'django-db')   # Can also use Redis as the backend
+CELERY_CACHE_BACKEND_URL = os.environ.get('CELERY_CACHE_BACKEND', 'django-cache')  # -||-
+
+# Standard Celery beat
+# Not needed if using Django Celery Beat
+CELERY_BEAT_SCHEDULE = {
+    'once_a_minute': {
+        'task': 'blog.tasks.periodic_task',
+        'schedule': 60.0,
+        'args': (60, 60),
+    },
+
+    'at_12_45': {
+        'task': 'blog.tasks.periodic_task',
+        'schedule': crontab(hour=12, minute=45),
+        'args': (12, 45),
+    },
+}
