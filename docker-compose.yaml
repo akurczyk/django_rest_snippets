@@ -34,7 +34,7 @@ services:
     build: ./app
     # Django Celery Beat
     command: watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery beat --app=django_rest_pg.celery.app --scheduler django_celery_beat.schedulers:DatabaseScheduler --loglevel=INFO
-    # Standard Celery BeatBeat
+    # Standard Celery Beat
     #command: watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery beat --app=django_rest_pg.celery.app --loglevel=INFO
     volumes:
       - ./app:/app
