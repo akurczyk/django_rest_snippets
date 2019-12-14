@@ -1,3 +1,9 @@
 # django_rest_snippets
 
-Sample Django 🚀 REST framework project with 🥬 Celery, 💓 django_celery_beat and 🧮 django_celery_results 🐳 dockerized done while I was repeating DRF for a new job. 😊
+🚀 Django REST framework
+🥬 Celery,
+💓 django_celery_beat
+🧮 django_celery_results
+🐳 Docker
+
+Sample project done while I was repeating above technologies for a new job. 😊
