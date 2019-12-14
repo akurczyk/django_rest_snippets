@@ -1,0 +1,8 @@
+.DS_Store
+.idea/
+/venv
+.env
+__pycache__/
+/app/db.sqlite3
+/app/media
+/app/static

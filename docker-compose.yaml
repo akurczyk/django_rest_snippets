@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+
+  postgres:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file: .env
+
+  redis:
+    image: redis:5.0.6-alpine
+    volumes:
+      - redis_data:/data
+
+  celery:
+    build: ./app
+    command: watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery worker --app=django_rest_pg.celery.app --concurrency=1 --loglevel=INFO
+    volumes:
+      - ./app:/app
+    env_file: .env
+    depends_on:
+      - redis
+      - postgres
+
+  django:
+    build: ./app
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./app:/app
+    env_file: .env
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+
+  postgres_data:
+  redis_data:
