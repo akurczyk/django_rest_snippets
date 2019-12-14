@@ -1,4 +1,4 @@
-FROM python:3.7.4-alpine3.10
+FROM python:alpine
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /app
 WORKDIR /app

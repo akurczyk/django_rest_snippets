@@ -3,19 +3,19 @@ version: '3.7'
 services:
 
   postgres:
-    image: postgres:12.0-alpine
+    image: postgres:alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file: .env
 
   rabbitmq:
-    image: rabbitmq:3.8.2-alpine
+    image: rabbitmq:alpine
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     env_file: .env
 
   #redis:
-  #  image: redis:5.0.6-alpine
+  #  image: redis:alpine
   #  volumes:
   #    - redis_data:/data
   #  env_file: .env
@@ -54,6 +54,8 @@ services:
     depends_on:
       - postgres
       - rabbitmq
+      - celery_beat
+      - celery_worker
 
 volumes:
 
